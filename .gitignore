@@ -25,3 +25,14 @@
 # Executables
 *.out
 *.app
+
+# TeX intermediate files
+*.gz
+*.toc
+*.out
+*.log
+*.aux
+
+# CMake-generated
+build/visual_studio/
+build/unix_makefiles/
