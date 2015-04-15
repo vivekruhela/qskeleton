@@ -40,12 +40,12 @@ if (UNIX)
 	add_custom_target(post_binaries ALL DEPENDS ddmUI eliminationUI
 					  COMMAND ${CMAKE_COMMAND} -E make_directory ${ROOT_DIR}/bin
 					  COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:ddmUI> ${ROOT_DIR}/bin/ddm
-					  COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:eliminationUI> ${ROOT_DIR}/bin/elimination)
+					  COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:eliminationUI> ${ROOT_DIR}/bin/fme)
 else()
 	add_custom_target(post_binaries ALL DEPENDS ddmUI eliminationUI
 					  COMMAND ${CMAKE_COMMAND} -E make_directory ${ROOT_DIR}/bin
 					  COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:ddmUI> ${ROOT_DIR}/bin/ddm.exe
-					  COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:eliminationUI> ${ROOT_DIR}/bin/elimination.exe)
+					  COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:eliminationUI> ${ROOT_DIR}/bin/fme.exe)
 endif()
 
 set_target_properties(post_binaries PROPERTIES FOLDER BuildInfrastructure)
