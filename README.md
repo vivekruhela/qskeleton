@@ -1,2 +1,2 @@
 # qskeleton
-Polyhedral computation software for the double description method and Fourier-Motzkin elimination
+Polyhedral computation software for solving facet and vertex enumeration problems for convex polyhedra and Fourier-Motzkin elimination: http://sbastrakov.github.io/qskeleton/
