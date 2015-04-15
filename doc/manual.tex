@@ -1,0 +1,425 @@
+\documentclass{article}
+
+\usepackage{verbatim}
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{changepage}
+
+\usepackage[unicode]{hyperref}
+
+\usepackage{pstricks}
+\usepackage{pst-node}           % PSTricks package for nodes
+\usepackage{pst-tree}           % PSTricks package for trees
+%\usepackage{pst-3dplot}
+%\usepackage{amsmath} % ��� cfrac
+\psset{linewidth=0.5pt,arrowlength=2.8}
+
+
+\newcommand{\qskeleton}{{\itshape qskeleton}\xspace}
+\newcommand{\qskeletonVersion}{{1.00}\xspace}
+\newcommand{\qskeletonDate}{April 8, 2015}
+\newcommand{\params}{\smallskip\hangindent=2\parindent}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+\newcommand{\NN}{{\cal N}}
+\newcommand{\BB}{{\cal B}}
+\newcommand{\LL}{{\cal L}}
+\newcommand{\LD}{{\cal LD}}
+\newcommand{\PP}{{\cal P}}
+\newcommand{\RRR}{{\cal R}}
+\newcommand{\SSS}{{\cal S}}
+\newcommand{\ZZ}{{\rm\bf Z}}
+\newcommand{\QQ}{{\rm\bf Q}}
+\newcommand{\RR}{{\rm\bf R}}
+\newcommand{\VV}{{\rm\bf V}}
+\newcommand{\CC}{{\rm\bf C}}
+\newcommand{\ee}{{\rm\bf e}}
+\newcommand{\ff}{{\rm\bf f}}
+\newcommand{\FF}{{\cal F}}
+\renewcommand{\Re}{\mathop{\rm Re}\nolimits}
+\renewcommand{\Im}{\mathop{\rm Im}\nolimits}
+\newcommand{\VS}{\mathop{\rm VS}\nolimits}
+\newcommand{\dist}{\mathop{\rm dist}\nolimits}
+\newcommand{\Aff}{\mathop{\rm Aff}\nolimits}
+\newcommand{\Lin}{\mathop{\rm Lin}\nolimits}
+\newcommand{\cone}[1]{\mathop{\rm cone} \left( #1 \right)}
+\newcommand{\conv}[1]{\mathop{\rm conv} \left( #1 \right)}
+\newcommand{\NonNeg}{\mathop{\rm NonNeg}\nolimits}
+\newcommand{\Conv}{\mathop{\rm Conv}\nolimits}
+\newcommand{\Ker}{\mathop{\rm Ker}\nolimits}
+\newcommand{\rank}{\mathop{\rm rank}\nolimits}
+\newcommand{\pr}{\mathop{\rm pr}\nolimits}
+\newcommand{\ort}{\mathop{\rm ort}\nolimits}
+\newcommand{\set}[1]{\left\{ #1\right\}}
+\newcommand{\oset}[1]{\left\langle #1\right\rangle}
+%\newcommand{\intie}[1]{\left[ #1\right]}
+\newcommand{\intie}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\intieup}[1]{\left\lceil #1\right\rceil}
+\newcommand{\transpose}{^{\top}}
+\newcommand{\GCD}{\mathop{\rm ���}\nolimits}
+\newcommand{\LCC}{\mathop{\rm ���}\nolimits}
+\newcommand{\diag}{\mathop{\rm diag}}
+\newcommand{\defect}{\mathop{\rm def}\nolimits}
+\newcommand{\degree}{\mathop{\rm deg}\nolimits}
+\newcommand{\pp}{\stackrel{.}{+}}
+\newcommand{\Sum}{\sum\limits}
+\newcommand{\tr}{\mathop{\rm tr}\nolimits}
+\newcommand{\lexmin}{\mathop{\rm lexmin}\limits}
+\newcommand{\comments}[1]{}
+\newcommand{\titlebf}[1]{\par\noindent{\bf #1.}}
+\newcommand{\titlesc}[1]{\par\noindent{\sc #1.}}
+\newcommand{\fracc}[2]{\frac{\textstyle #1\strut}{\textstyle #2\strut}}
+\newcommand{\fraccc}[2]{\leavevmode\kern.1em\raise.5ex\hbox{\scriptsize $#1$}
+  \kern-.1em / \kern-.15em \lower.25ex\hbox{\scriptsize $#2$}\,}
+\newcommand{\fr}[1]{\fbox{$#1$}}
+\newcommand{\newsubsection}{\medskip\centerline{* * *}\medskip\nopagebreak}
+\newenvironment{narrowarray}[1]{\arraycolsep=0.15em\begin{array}{#1}}{\end{array}}
+\newcommand{\lpp}[2]{\begin{array}{c}#1\\[8pt]{} #2\end{array}}
+\newcommand{\no}[1]{^{(#1)}}
+\newcommand{\tpsb}[2]{\begin{MAT}(e){cc} #1 & \star \\ & #2 \\ \end{MAT}}
+\newcommand{\tpsn}[1]{\begin{MAT}(e){cc} #1 & \\ & \\    \end{MAT}}
+\newcommand{\Ref}[1]{{\rm (\ref{#1})}}
+\newcommand{\xhat}{{\widehat x}}
+\newcommand{\xtilde}{{\widetilde x}}
+\newcommand{\xbar}{{\overline{x}}}
+\newcommand{\uhat}{{\widehat u}}
+\newcommand{\utilde}{{\widetilde u}}
+\newcommand{\ahat}{{\widehat a}}
+\newcommand{\atilde}{{\widetilde a}}
+\newcommand{\bhat}{{\widehat b}}
+\newcommand{\btilde}{{\widetilde b}}
+\newcommand{\chat}{{\widehat c}}
+\newcommand{\fhat}{{\widehat f}}
+\newcommand{\ctilde}{{\widetilde c}}
+\newcommand{\vtilde}{{\widetilde v}}
+\newcommand{\wtilde}{{\widetilde w}}
+\newcommand{\ytilde}{{\widetilde y}}
+\newcommand{\ttilde}{{\widetilde t}}
+\newcommand{\Btilde}{{\widetilde B}}
+\newcommand{\Ntilde}{{\widetilde N}}
+
+\newcounter{formula}
+%\newcounter{formula}[chapter]
+\renewcommand{\theformula}{\arabic{formula}}
+%\renewcommand{\theformula}{\thechapter.\arabic{formula}}
+%\newcommand{\tag}[1]{\refstepcounter{formula}
+%  \eqno{(\theformula:#1)}\label{#1}}
+%\newcommand{\tag}[1]{\refstepcounter{formula}
+%  \eqno{(\theformula)}\label{#1}}
+
+
+\begin{document}
+
+\title{{\bf qskeleton \\ {\Large User's Guide} \\ {\large Version~\qskeletonVersion}}}
+
+\date{\qskeletonDate}
+
+\author{Sergey Bastrakov \\[0.5em] 
+\small bastrakov@vmk.unn.ru \\[0.5em]
+\normalsize Lobachevsky State University of Nizhni Novgorod, Russia}
+
+\maketitle
+
+
+\tableofcontents
+
+\newpage
+
+\newcommand{\AB}{(A\transpose,B\transpose)}%{\left(\begin{array}{c}{A\\ B}\end{array}\right)}
+
+
+
+\section{Introduction}
+
+\subsection{Theoretical preliminaries}
+
+Each convex polyhedron in $\RR^d$ can be represented in the following two ways:
+\begin{enumerate}
+  \item[1.] {\em Facet representation} as a set of solutions to a system of linear inequalities:
+\begin{equation}
+P = \set{x \in \RR^d: Ax \geq b} \, .
+\end{equation}
+  \item[2.] {\em Vertex representation} as the Minkowski's sum of the convex hull of some points and conical hull of some vectors in $\RR^d$:
+\begin{equation}
+P = \conv{v_1, v_2, \dots, v_n} + \cone{u_1, u_2, \dots, u_m} \, .
+\end{equation}
+\end{enumerate}
+
+The problem to compute representation (2) for given representation (1) is called the {\em vertex enumeration problem}. The converse one
+is called the {\em facet enumeration problem}, or in case of polytopes (bounded polyhedra) --- {\em convex hull problem}.
+
+Analogously, each polyhedral cone in $\RR^d$
+can be represented in the following two ways:
+\begin{enumerate}
+  \item[1.] {\em Facet representation} as a set of solutions to a homogeneous system of  linear inequalities:
+$$
+C = \set{x \in \RR^d: Ax \geq 0} \, .
+$$
+  \item[2.] {\em Vertex representation} as a set of all non-negative linear combinations of some vectors in $\RR^d$:
+$$
+C = \cone{u_1, u_2, \dots, u_m} \, .
+$$
+\end{enumerate}
+
+There is a standard way to reduce vertex/facet enumeration problem for polyhedra
+to the corresponding problem for polyhedral cones. The vertex and facet enumeration problems are dual to one another, thus the same algorithm can be used to solve both problems.
+
+A closely related operation is {\em eliminating variables} from systems of linear inequalities. The result of eliminating variables $\set{x_1, x_2, \dots x_k}$ from a system of linear inequalities is another system of linear inequalities without the variables from $X$, such that the solution sets of both systems over the remaining variables are the same.
+
+\subsection{What is qskeleton?}
+
+\qskeleton is polyhedral computation software for solving the vertex and facet enumeration problems for convex polyhedra and polyhedral cones, and eliminating variables from systems of linear inequalities. It implements  the double description method (DDM) and Fourier-Motzkin elimination (FME) with Chernikov rules. The input data can be integer or real numbers.
+
+\qskeleton is capable of solving the following problems:
+\begin{itemize}
+\item computing vertex representation of a polyhedron (or polyhedral cone), given the facet representation;
+\item computing facet representation of a polyhedron (or polyhedral cone), given the vertex representation; in particular, if a polyhedron is bounded, this is convex hull problem;
+\item eliminating variables from a system of linear inequalities, geometrically, projecting a polyhedron onto a linear subspace. 
+\end{itemize}
+
+The following are also polyhedral computing problems, but \qskeleton is not capable of solving those:
+\begin{itemize}
+\item computing a face lattice of a polyhedron;
+\item computing a triangulation of a polyhedron;
+\item finding integer points of a polyhedron.
+\end{itemize}
+
+\qskeleton is publicly available sofrware distributed under the GNU GPLv2.
+
+
+%\subsection{Related software}
+
+
+\section{Building qskeleton}
+
+Download the source code of \qskeleton from GitHub \newline \url{https://github.com/sbastrakov/qskeleton} as an archive or clone the repository using git.
+
+The build system is based on CMake that can be obtained from \newline \url{http://www.cmake.org/download/}. To build \qskeleton go to {\tt build} directory and run {\tt build\_linux.sh} or {\tt build\_windows.bat} depending on your operating system. Running {\tt build\_linux.sh} generates a Makefile in a newly created subdirectory {\tt build/unix\_makefiles}. Running {\tt build\_windows.bat} generates a Visual Studio solution in a newly created subdirectory {\tt build/visual\_studio}. 
+
+The default compilers are g++ on Linux and Visual Studio 2010 on Windows. In case you use another compiler, modify the {\tt -G and/or -D} parameters in the corresponding script, refer to CMake documentation for generator names. Note that is case Visual Studio is used the default configuration of the generated solution is Debug, while it is strongly recommended to build in Release configuration for performance considerations. 
+
+In case for some reason CMake can not be used, it should be rather easy to build \qskeleton manually: the code does not use any non-standard language features and the only external dependence is tclap header-only template library located in {\tt deps} directory.
+
+
+\section{Facet and vertex enumeration using qskeleton}
+
+\qskeleton directly solves ray enumeration problem which is a vertex enumeration problem for polyhedral cones as described at subsection \ref{sec_RayEnumeration}. Facet enumeration for polyhedral cones as well as facet and vertex enumeration problems for geenral polyhedra can be easily reduced to ray enumeration, as described at the following subsections.
+
+\subsection{Ray enumeration for polyhedral cones}\label{sec_RayEnumeration}
+
+The ray enumeration problem for polyhedral cones is given a matrix $A\in\RR^{n\times d}$ find a set of extreme rays $\set{u_1, u_2, \dots u_m}$ such that  $\set{x: Ax \geq 0} = \cone{u_1, u_2, \dots, u_n}$.
+
+To use \qskeleton one should create an input file that contains the matrix $A$. Input file is a text file with the first line containing two integer numbers --- the number of rows and columns of the matrix, and the rest of the file containing the elements of the matrix in row-major order. Numbers are separated by spaces and blank lines.
+
+For example, if you want to enumerate the extreme rays of the cone $C$
+defined as a set of solution to the system
+$$
+\left\{
+\begin{narrowarray}{ccccccl}
+ &x_1 &       & + & x_3  & \ge & 0, \\
+-&x_1 &       & + & x_3 & \ge & 0, \\
+ &      & x_2 & + & x_3 & \ge & 0, \\
+ &     -& x_2 & + & x_3 & \ge & 0. \\
+\end{narrowarray}
+\right.
+$$
+The corresponding input file is
+\begin{adjustwidth}{5cm}{0pt}
+4 3 \\
+1 0 1 \\
+-1 0 1 \\
+0 1 1 \\
+0 -1 1
+\end{adjustwidth}
+
+To run \qskeleton just type in the command prompt:
+\begin{verbatim}
+ddm filename
+\end{verbatim}
+where \verb$ddm$ is a path to the ddm executable (by default \verb$bin/ddm$) and \verb$filename$ is a path to the input file. The input file for the above-mentioned example is in \verb$examples/example.ine$ subdirectory, so ddm can be invoked from the \qskeleton root directory with the input file \verb$examples/example.ine$ and output file \verb$examples/example.ext$ as 
+\begin{verbatim}
+bin/ddm examples/example.ine -o examples/example.ext
+\end{verbatim}
+(replace / with \textbackslash~on Windows).
+
+In case the output file name is not provided, the output will be done to stdout. The output format is the same as input: the first line contains number of extreme rays and dimensionality and the rest of the output is ray matrix in the row-major order, each row corresponds to an extreme ray. 
+
+In our example the output (\verb$examples/example.ext$) is 4 extreme rays:
+\begin{adjustwidth}{5cm}{0pt}
+4 3 \\
+1 -1 1 \\
+-1 -1 1 \\
+1 1 1 \\
+-1 1 1
+\end{adjustwidth}
+
+The set of extreme rays of the original cone is
+$$\cone{(1, -1, 1)\transpose, (-1, -1, 1)\transpose, (1, 1, 1)\transpose, (-1, 1, 1)\transpose}.
+$$
+
+\subsection{Facet enumeration for polyhedral cones}\label{sec_FacetEnumeration}
+
+Facet enumeration problem for polyhedral cones is the inverse to ray enumeration. These two problems are mutually dual, thus for facet enumeration one just needs to write rays as rows of a matrix, perform ray enumeration for this matrix and interpret rows of the resulting matrix as coefficients of inequalities.
+
+To find the facet representation of the example cone from the previous subsection run
+\begin{verbatim}
+bin/ddm examples/example.ext
+\end{verbatim}
+
+The result is
+\begin{adjustwidth}{5cm}{0pt}
+4 3 \\
+1 0 1 \\
+-1 0 1 \\
+0 1 1 \\
+0 -1 1
+\end{adjustwidth}
+which is exactly (up to reordering) the inequalities of the original cone in \verb$examples/example.ine$.
+
+\subsection{Vertex enumeration for convex polyhedra}\label{sec_PolyhedraVertexEnumeration}
+
+The vertex enumeration problem for convex polyhedra can be reduced to ray enumeration of polyhedral code using the standard homogenization procedure.
+
+Consider a polyhedron $P = \set{x \in \RR^d: Ax \geq b}$. Introduce a new variable $x_{d+1}$ and consider the cone $C = \set{x \in \RR^{d+1}: Ax \geq bx_{d+1}, x_{d+1} \geq 0}$. Obviously, $P = C \cap \set{x \in \RR^{d+1}: x_{d+1} = 1}$. Note that in case interior of $P$ contains 0 the inequality $ x_{d+1} \geq 0$ is redundant in $C$ and can be omitted. Now construct extreme rays $U = \set{u^{(1)}, u^{(2)}, \dots, u^{(m)}} \subset \RR^{d+1}$ of $C$. Each extreme ray of $C$ corresponds to either a vertice or extreme ray of $P$. If the $(d+1)$-st component of extreme ray $u \in U$ is not zero ($u_{d+1} \neq 0$), it corresponds to a vertice $v = (u_1 / u_{d+1}, u_2 / u_{d+1}, \dots, u_d / u_{d+1})$ of the polyhedron $P$. If the $(d+1)$-st component of extreme ray $u$ is zero, it corresponds to an extreme ray $v = (u_1, u_2, \dots, u_d )$ of the polyhedron.
+
+For example consider finding the vertex representation of a 3-dimensional cube $-1 \leq x_i \leq 1. i = 1, 2, 3$. After homogenization the system in form $Ax \geq 0$ is
+$$
+\left\{
+\begin{narrowarray}{ccccccccccl}
+ & x_1 &        &       & +& x_4 & \ge & 0, \\
+-& x_1 &        &       & +& x_4 & \ge & 0, \\
+ &       &  x_2 &       & +& x_4 & \ge & 0, \\
+ &      -& x_2  &       & +& x_4 & \ge & 0, \\
+ &       &        & x_3 & +& x_4 & \ge & 0, \\
+ &       &       -& x_3 & +& x_4 & \ge & 0, \\
+\end{narrowarray}
+\right.
+$$
+($x_4 \geq 0$ is redundant and thus ommited).
+
+The corresponding input file (\verb$examples/cube3.ine$) is
+\begin{adjustwidth}{5cm}{0pt}
+6 4 \\
+1 0 0 1 \\
+-1 0 0 1 \\
+0 1 0 1 \\
+0 -1 0 1 \\
+0 0 1 1 \\
+0 0 -1 1
+\end{adjustwidth}
+and the output (\verb$examples/cube3.ext$) is
+\begin{adjustwidth}{5cm}{0pt}
+8 4 \\
+-1 -1 -1 1 \\
+-1 1 -1 1 \\
+1 -1 -1 1 \\
+1 1 -1 1 \\
+-1 -1 1 1 \\
+-1 1 1 1 \\
+1 1 1 1 \\
+1 -1 1 1
+\end{adjustwidth}
+There are 8 extreme rays of the corresponding code, the last component of each ray is 1, thus there are 8 vertices of the cube:
+\begin{align*}
+v_1 = (-1, -1, -1)\transpose, v_2 = (-1, -1, 1)\transpose, \\
+v_3 = (-1, 1, -1)\transpose, v_4 = (-1, 1, 1)\transpose, \\
+v_5 = (1, -1, -1)\transpose, v_6 = (1, -1, 1)\transpose,  \\
+v_7 = (1, 1, -1)\transpose, v_8 = (1, 1, 1)\transpose. \\
+\end{align*}
+
+
+\subsection{Facet enumeration for convex polyhedra}\label{sec_PolyhedraFacetEnumeration}
+
+Facet enumeration problem for convex polyhedra is dual to vertex enumeration. However, unlike the cones, one should first make sure 0 is a point of a polyhedron which can be obtained by coordinate shift. 
+
+Increase dimension by 1 augmenting each vertex with 1 and extreme ray with 0 and submit those as input matrix. The resulting matrix should be interpreted as $(A | -b)$ and the system in inequalities is $Ax \geq b$.
+
+For example, to find the inequalities of the cube from the previous subsection, the input file is
+\begin{adjustwidth}{5cm}{0pt}
+8 4 \\
+-1 -1 -1 1 \\
+-1 1 -1 1 \\
+1 -1 -1 1 \\
+1 1 -1 1 \\
+-1 -1 1 1 \\
+-1 1 1 1 \\
+1 1 1 1 \\
+1 -1 1 1
+\end{adjustwidth}
+and the output file is
+\begin{adjustwidth}{5cm}{0pt}
+6 4 \\
+0 0 1 1 \\
+0 1 0 1 \\
+1 0 0 1 \\
+0 0 -1 1 \\
+0 -1 0 1 \\
+-1 0 0 1
+\end{adjustwidth}
+
+\subsection{Options}\label{sec_DDMOptions}
+
+For the list of options run \verb$ddm$ with \verb$-h$ option.
+
+
+\section{Fourier-Motzkin elimination using qskeleton}
+
+\subsection{Fourier-Motzkin elimination for homogeneous systems}
+
+To perform Fourier-Motzkin elimination for a system of linear inequalities use binary \verb$bin/fme$.
+
+The input is a matrix of a system $Ax \geq 0$. The input file format is similar to the input for \verb$ddm$: the first line contains the number of rows and columns of the matrix, followed by elements of the matrix in row-major order.
+
+A set of eliminated variables are defined by a file provided by \verb$-e$ argument; by defailt all variables are eliminated. Elimination file consists of the number of eliminated varialbes followed by indexes of variables, indexes are 0-based (i.e. the index of the first variable is 0).
+
+For example consider elimination of variables $x_0$ and $x_1$ from the system
+$$
+\left\{
+\begin{narrowarray}{ccccccl}
+ &x_0 &       & + & x_2  & \ge & 0, \\
+-&x_0 &       & + & x_2 & \ge & 0, \\
+ &      & x_1 & + & x_2 & \ge & 0, \\
+ &     -& x_1 & + & x_2 & \ge & 0. \\
+\end{narrowarray}
+\right.
+$$
+The input file is \verb$examples/example.ine$:
+\begin{adjustwidth}{5cm}{0pt}
+4 3 \\
+1 0 1 \\
+-1 0 1 \\
+0 1 1 \\
+0 -1 1
+\end{adjustwidth}
+Elimination file is \verb$examples/example.elim$
+\begin{adjustwidth}{5cm}{0pt}
+2 \\
+0 1
+\end{adjustwidth}
+The result is
+\begin{adjustwidth}{5cm}{0pt}
+2 3 \\
+0 0 1 \\
+0 0 1
+\end{adjustwidth}
+
+Note that unlike facet and vertex enumeration, the result of elimination can contain redundant inequalities.
+
+\subsection{Fourier-Motzkin elimination for non-homogeneous systems}
+
+In case elimination is applied to a system $Ax \geq b$, reduce it the the homogenious case by using matrix $(A|-b)$.
+
+\subsection{Options}\label{sec_FMEOptions}
+
+For the list of options run \verb$fme$ with \verb$-h$ option.
+
+
+%\bibliographystyle{alpha}
+
+%\bibliography{skeleton}
+
+\end{document}
+
